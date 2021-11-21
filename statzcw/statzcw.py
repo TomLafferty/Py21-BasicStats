@@ -32,29 +32,42 @@ def zmedian(list) -> float:
         return sum(sorted(list)[middle -1:middle +1]) / 2
 
 def zvariance(list) -> float:
-    '''Variance of a list'''
-
-
-
+    '''Variance of a list,
+    average of the squared differences from the mean'''
+    n = zcount(list) - 1
+    mean = zmean(list)
+    deviations = []
+    for xi in list:
+        deviations.append((mean - xi) ** 2)
+    variance = sum(deviations) / n
+    return variance
 
 def zstddev(list) -> float:
     '''Standard Deviation of a list,
     square root of the variance of a list'''
-
-
-
+    return zvariance(list) ** 0.5
 
 def zstderr(list) -> float:
     '''Standard error of a list,
     Standard deviation divided by square root of the count'''
+    return zstddev(list) / (zcount(list) ** 0.5)
+
+def zcov(list1, list2):
+    '''Covariance of two lists to be used for correlation'''
+    summed = 0
+    for i in range(0, zcount(list1)):
+        summed += ((list1[i] - zmean(list1)) * (list2[i] - zmean(list2)))
+    return summed/(zcount(list1)-1)
 
 
 def zcorr(listx, listy) -> float:
     '''Correlation, finding the covariance between the two lists,
     then the correlation is the covariance divided by the stddev of each list multiplied together'''
+    return zcov(listx, listy) / (zstddev(listx) * zstddev(listy))
 
 
-
-answer = (zmedian([4,12,2,5,3]))
+data0 = [1.0, 2.0, 3.0, 4.0, 5.0]
+data2 = [1.0, 2.0, 2.0, 4.0, 5.0]
+answer = (zcorr(data0, data2))
 print(answer)
 print(type(answer))
