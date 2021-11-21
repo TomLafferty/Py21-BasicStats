@@ -1,4 +1,4 @@
-
+import pandas as pd
 
 
 # can put in one .py file, shoot for about 76 lines long for total - Kris
@@ -66,8 +66,22 @@ def zcorr(listx, listy) -> float:
     return zcov(listx, listy) / (zstddev(listx) * zstddev(listy))
 
 
-data0 = [1.0, 2.0, 3.0, 4.0, 5.0]
-data2 = [1.0, 2.0, 2.0, 4.0, 5.0]
-answer = (zcorr(data0, data2))
-print(answer)
-print(type(answer))
+# data0 = [1.0, 2.0, 3.0, 4.0, 5.0]
+# data2 = [1.0, 2.0, 2.0, 4.0, 5.0]
+# answer = (zcorr(data0, data2))
+# print(answer)
+# print(type(answer))
+
+
+def readDataFile(file):
+    '''read the .csv file'''
+    return pd.read_csv(file)
+
+
+
+def readDataSets(files):
+    '''read multiple .csv files ?'''
+
+
+#
+# readDataFile("/Users/laffertythomas/dev/Py21-BasicStats/dataOne.csv")
